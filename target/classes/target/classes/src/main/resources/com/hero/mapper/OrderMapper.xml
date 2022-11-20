@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hero.mapper.OrderMapper">
+    <!--
+    <resultMap>标签作用：自定义查询结果集映射
+    id属性值：resultMap唯一标识
+    type属性值：设置resultMap映射结果类型：可以写别名，也可以写类全限定名称
+    -->
+    <resultMap id="findAllResultMap" type="com.hero.pojo.Order">
+        <!--
+        <id>标签作用：映射主键
+        property属性值：指定Order实体类中的成员变量
+        column属性值：指定查询结果集中的列名
+        -->
+        <id property="id" column="id"/>
+        <!--
+        <result> 标签作用：映射对象普通成员变量
+        property属性值：指定Order实体类中的成员变量
+        column属性值：指定查询结果的列名
+        -->
+        <result property="userId" column="user_id"/>
+        <result property="number" column="number"/>
+        <result property="createtime" column="createtime"/>
+        <result property="note" column="note"/>
+    </resultMap>
+
+    <!--
+    查询所有订单信息
+    resultMap属性值：设置自定义查询结果映射配置的id，也就是resultMap的id
+    -->
+    <!--<select id="findAll" resultType="order">-->
+    <select id="findAll" resultMap="findAllResultMap">
+        select *
+        from `order`;
+    </select>
+
+
+<!--    &lt;!&ndash;-->
+<!--    查询所有订单信息-->
+<!--    Sql查询字段名和Pojo的属性名不一致, userId为null-->
+<!--    &ndash;&gt;-->
+<!--    <select id="findAll" resultType="com.hero.pojo.Order">-->
+<!--        select *-->
+<!--        from `order`;-->
+<!--    </select>-->
+</mapper>
